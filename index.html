@@ -1,66 +1,234 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-        <html lang="uk">
-        <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Варіант 5 - Лабораторія (Grid CSS)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Варіант 5 - Лабораторія (Grid CSS)</title>
     <link rel="stylesheet" href="style_grid.css">
+    <style>
+        /* ================================================= */
+        /* 1. УНІФІКОВАНІ БАЗОВІ СТИЛІ (ДЛЯ ВСІХ ВЕРСТОК)  */
+        /* ================================================= */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        /* Стилі для контейнера перемикача версток */
+        .layout-nav {
+            width: 98%; 
+            max-width: 1300px; 
+            margin: 10px auto;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+        }
+        .layout-nav a { 
+            margin: 0 10px;
+            padding: 8px 15px;
+            border: 1px solid #007bff;
+            text-decoration: none;
+            color: #007bff;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        /* Стилі для ВСІХ блоків контейнера */
+        .block {
+            padding: 15px;
+            border: 1px solid #EAEAEA; 
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        /* Кольори та спеціальні стилі */
+        .block-1, .block-7 { background-color: #D3E0F0; }
+        .block-2, .block-5 { background-color: #F8E3D4; }
+        .block-3, .block-6 { background-color: #E6F3E6; }
+        .block-4 { background-color: white; }
+
+        /* Стилі для елементів контенту */
+        .header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .sidebar-menu a {
+            display: block;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 5px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .block-7 .input-box { 
+            position: absolute; 
+            right: 15px; 
+        }
+
+        /* ================================================= */
+        /* 2. GRID ВЕРСТКА (ДЕСКТОП - 3 КОЛОНКИ) */
+        /* ================================================= */
+        .container {
+            width: 98%; 
+            max-width: 1300px; 
+            min-height: 700px; 
+            border: 1px solid #ccc; 
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            grid-template-rows: 70px 50px 1fr 50px 40px;
+            gap: 0;
+        }
+
+        /* Розміщення блоків */
+        .block-1, .block-7 { 
+            grid-column: 1 / 4; 
+            height: auto; 
+        }
+
+        /* Блоки, що розтягуються */
+        .block-2 { 
+            grid-column: 1; 
+            grid-row: 2 / 5; 
+            padding: 10px; 
+        }
+        .block-5 { 
+            grid-column: 3; 
+            grid-row: 2 / 5; 
+        }
+
+        /* Центральна колонка */
+        .block-3 { 
+            grid-column: 2; 
+            grid-row: 2; 
+        }
+        .block-4 { 
+            grid-column: 2; 
+            grid-row: 3; 
+        }
+        .block-6 { 
+            grid-column: 2; 
+            grid-row: 4; 
+        }
+
+        /* ================================================= */
+        /* 3. АДАПТИВНІ СТИЛІ (MOBILE) */
+        /* ================================================= */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 100%;
+                max-width: 100%;
+                display: flex;
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .block {
+                width: 100%;
+                height: auto;
+            }
+
+            /* Порядок блоків: 1 -> 2 -> 3 -> 4 -> 6 -> 5 -> 7 */
+            .block-1 { 
+                order: 1; 
+                flex-direction: column; 
+                text-align: center; 
+            }
+            .block-2 { order: 2; } 
+            .block-3 { order: 3; }
+            .block-4 { order: 4; }
+            .block-6 { order: 5; }
+            .block-5 { order: 6; }
+            .block-7 { order: 7; }
+
+            /* АДАПТАЦІЯ МЕНЮ */
+            .sidebar-menu {
+                display: flex;
+                flex-direction: row; 
+                flex-wrap: wrap; 
+                justify-content: space-around;
+                padding: 5px;
+            }
+            .sidebar-menu a {
+                width: 45%; 
+                margin-bottom: 5px;
+            }
+            
+            /* Адаптація header */
+            .header {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .input-box {
+                position: static !important;
+                margin-top: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav class="layout-nav">
-    <h2>Варіант 5. .Перемикач версток:</h2>
-    <a href="index_grid.html" style="background-color: #e0f0ff;">1. Grid CSS </a>
-</nav>
-
-<div class="container">
-
-    <div class="block block-1 header">
-        <span class="logo">Лабораторія Верстки</span>
-        <span class="slogan">Варіант 5: Демонстрація CSS-макетів</span>
-        <div class="input-box">x</div>
+    <nav class="layout-nav">
+        <h2>Варіант 5. Перемикач версток:</h2>
+        <a href="index_grid.html" style="background-color: #e0f0ff;">1. Grid CSS</a>
+    </nav>
+    
+    <div class="container">
+        <div class="block block-1 header">
+            <span class="logo">Лабораторія Верстки</span>
+            <span class="slogan">Варіант 5: Демонстрація CSS-макетів</span>
+            <div class="input-box">x</div>
+        </div>
+        
+        <div class="block block-2 sidebar-menu">
+            <a href="#">Головна</a>
+            <a href="#">Flexbox</a>
+            <a href="#">Grid</a>
+            <a href="#">Classic</a>
+            <a href="#">Проект</a>
+        </div>
+        
+        <div class="block block-3 announcement">
+            <p>Огляд Основних Принципів CSS</p>
+        </div>
+        
+        <div class="block block-4 main-content-area">
+            <h3>Детальний опис алгоритму AVL-дерева</h3>
+            <p>AVL-дерево є самобалансуючим бінарним деревом пошуку. Головна вимога: для будь-якої вершини висоти її лівого та правого піддерев можуть відрізнятися не більше ніж на 1.</p>
+            <p>Це забезпечує швидкий час пошуку, вставки та видалення, що має часову складність O(log n).</p>
+        </div>
+        
+        <div class="block block-6 small-ad-space">
+            <p>Примітка: Верстка має бути ідентичною у всіх трьох режимах.</p>
+        </div>
+        
+        <div class="block block-5 trends-sidebar">
+            <h4>Довідка</h4>
+            <p>Складність алгоритмів: O(n)</p>
+            <p>Основні структури даних: Списки, черги, стеки, дерева.</p>
+        </div>
+        
+        <div class="block block-7 footer">
+            <p>&copy; 2025 Комп'ютерний Практикум. x та y — технічні маркери.</p>
+            <div class="input-box">y</div>
+        </div>
     </div>
-
-    <div class="block block-2 sidebar-menu">
-        <a href="#">Головна</a>
-        <a href="#">Flexbox</a>
-        <a href="#">Grid</a>
-        <a href="#">Classic</a>
-        <a href="#">Проект</a>
-    </div>
-
-    <div class="block block-3 announcement">
-        <p>Огляд Основних Принципів CSS</p>
-    </div>
-
-    <div class="block block-4 main-content-area">
-        <h3>Детальний опис алгоритму AVL-дерева</h3>
-        <p>AVL-дерево є самобалансуючим бінарним деревом пошуку. Головна вимога: для будь-якої вершини висоти її лівого та правого піддерев можуть відрізнятися не більше ніж на 1.</p>
-        <p>Це забезпечує швидкий час пошуку, вставки та видалення, що має часову складність $O(\log n)$.</p>
-    </div>
-
-    <div class="block block-6 small-ad-space">
-        <p>Примітка: Верстка має бути ідентичною у всіх трьох режимах.</p>
-    </div>
-
-    <div class="block block-5 trends-sidebar">
-        <h4>Довідка</h4>
-        <p>Складність алгоритмів: $O(n)$</p>
-        <p>Основні структури даних: Списки, черги, стеки, дерева.</p>
-    </div>
-
-    <div class="block block-7 footer">
-        <p>&copy; 2025 Комп'ютерний Практикум. **x** та **y** — технічні маркери.</p>
-        <div class="input-box">y</div>
-    </div>
-</div>
-</body>
-</html></title>
-</head>
-<body>
-
 </body>
 </html>
