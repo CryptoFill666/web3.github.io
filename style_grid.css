@@ -1,90 +1,66 @@
-/* ==================================== */
-/* 1. ЗАГАЛЬНІ СТИЛІ ТА BODY/НАВІГАЦІЯ  */
-/* ==================================== */
+/* ================================================= */
+/* 1. УНІФІКОВАНІ БАЗОВІ СТИЛІ (ДЛЯ ВСІХ ВЕРСТОК)  */
+/* ================================================= */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
+    display: flex; 
     flex-direction: column;
     align-items: center; /* Центруємо основний контент */
     width: 100%;
     min-height: 100vh;
+    background-color: #f0f0f0;
 }
 
-/* Стилі для навігації */
+/* Стилі для контейнера перемикача версток */
 .layout-nav {
-    width: 98%; /* Ширина, щоб візуально відповідала контейнеру */
-    max-width: 1300px;
+    width: 98%; 
+    max-width: 1300px; 
     margin: 10px auto;
     text-align: center;
     padding: 10px;
     border: 1px solid #ccc;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 }
-.layout-nav a { /* ... (стилі для посилань) ... */ }
-
-/* ==================================== */
-/* 2. GRID КОНТЕЙНЕР (ПОВНА ШИРИНА)     */
-/* ==================================== */
-.container {
-    width: 98%; /* Займає майже всю ширину */
-    max-width: 1300px; /* Обмеження для великих моніторів */
-    height: auto;
-    min-height: 700px;
-    border: 1px solid #ccc;
-
-    /* GRID НАЛАШТУВАННЯ */
-    display: grid;
-    grid-template-columns: 200px 1fr 200px; /* 200px - меню, 1fr - центр, 200px - тренди */
-    grid-template-rows: 70px 50px 1fr 50px 40px; /* Фіксована шапка, анонси та футер */
-    gap: 0;
+.layout-nav a { 
+    margin: 0 10px;
+    padding: 8px 15px;
+    border: 1px solid #007bff;
+    text-decoration: none;
+    color: #007bff;
+    background-color: white;
+    border-radius: 5px;
 }
 
-/* ==================================== */
-/* 3. КОЛЬОРИ ТА РОЗМІЩЕННЯ БЛОКІВ GRID */
-/* ==================================== */
+/* Стилі для ВСІХ блоків контейнера */
 .block {
     padding: 15px;
-    border: 1px solid #EAEAEA;
+    border: 1px solid #EAEAEA; 
     box-sizing: border-box;
+    font-size: 14px;
+    color: #333;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
 }
 
-/* БЛОК 1 (HEADER) */
-.block-1 {
-    grid-column: 1 / 4;
-    background-color: #D3E0F0;
+/* Кольори та спеціальні стилі (згідно з Варіантом 5) */
+.block-1, .block-7 { background-color: #D3E0F0; } /* Блакитний */
+.block-2, .block-5 { background-color: #F8E3D4; } /* Помаранчевий */
+.block-3, .block-6 { background-color: #E6F3E6; } /* Зелений */
+.block-4 { background-color: white; } /* Білий */
+
+/* Стилі для елементів контенту */
+.header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
+    font-size: 1.2em;
 }
-
-/* БЛОК 7 (FOOTER) */
-.block-7 {
-    grid-column: 1 / 4;
-    background-color: #D3E0F0;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 0.9em;
-    position: relative;
-    padding-left: 15px;
-}
-.block-7 .input-box { position: absolute; right: 15px; } /* Позиціонування Y */
-
-/* БЛОК 2 (ЛІВЕ МЕНЮ) */
-.block-2 {
-    grid-column: 1;
-    grid-row: 2 / 5; /* 3 рядки: 2, 3, 4 */
-    background-color: #F8E3D4;
-    padding: 0;
-}
-.sidebar-menu a { /* Стилі для посилань меню */
+.sidebar-menu a { /* Стилі кнопок у Блоці 2 */
     display: block;
     padding: 10px 15px;
     background-color: #007bff;
@@ -92,57 +68,67 @@ body {
     text-decoration: none;
     margin-bottom: 5px;
     text-align: center;
+    box-sizing: border-box;
 }
+.block-7 .input-box { position: absolute; right: 15px; } 
 
-/* БЛОКИ 3, 4, 6 (ЦЕНТР) */
-.block-3 {
-    grid-column: 2; grid-row: 2;
-    background-color: #E6F3E6;
-    justify-content: center;
-}
-.block-4 {
-    grid-column: 2; grid-row: 3;
-    background-color: white;
-}
-.block-6 {
-    grid-column: 2; grid-row: 4;
-    background-color: #E6F3E6;
-    justify-content: center;
-}
 
-/* БЛОК 5 (ПРАВА ПАНЕЛЬ) */
-.block-5 {
-    grid-column: 3;
-    grid-row: 2 / 5;
-    background-color: #F8E3D4;
-}
 /* ================================================= */
-/* АДАПТИВНІ СТИЛІ (MOBILE - Media Query) */
+/* 2. GRID ВЕРСТКА (ДЕСКТОП - 3 КОЛОНКИ) */
+/* ================================================= */
+
+.container {
+    width: 98%; 
+    max-width: 1300px; 
+    min-height: 700px; 
+    border: 1px solid #ccc; 
+    
+    /* GRID НАЛАШТУВАННЯ */
+    display: grid;
+    grid-template-columns: 200px 1fr 200px; /* 200px меню, 1fr центр, 200px довідка */
+    grid-template-rows: 70px 50px 1fr 50px 40px; /* Фіксовані висоти для 1, 3, 6, 7 */
+    gap: 0;
+}
+
+/* Розміщення блоків */
+.block-1, .block-7 { grid-column: 1 / 4; height: auto; }
+
+/* Блоки, що розтягуються (2, 5) */
+.block-2 { grid-column: 1; grid-row: 2 / 5; padding: 0; }
+.block-5 { grid-column: 3; grid-row: 2 / 5; }
+
+/* Центральна колонка */
+.block-3 { grid-column: 2; grid-row: 2; }
+.block-4 { grid-column: 2; grid-row: 3; }
+.block-6 { grid-column: 2; grid-row: 4; }
+
+
+/* ================================================= */
+/* 3. АДАПТИВНІ СТИЛІ (MOBILE - Media Query) */
 /* ================================================= */
 
 @media screen and (max-width: 768px) {
     
-    /* 1. КОНТЕЙНЕР: Перехід на одну колонку */
     .container {
         width: 100%;
         max-width: 100%;
-        /* Зміна Grid: Встановлюємо одну колонку і авто-рядки */
+        /* ПЕРЕХІД НА 1 КОЛОНКУ */
         grid-template-columns: 1fr; 
-        grid-template-rows: auto; /* Висота рядків автоматично за контентом */
+        grid-template-rows: auto; 
         min-height: auto;
     }
     
-    /* 2. СКИДАННЯ ВЛАСТИВОСТЕЙ ТА ПОРЯДОК БЛОКІВ */
+    /* СКИДАННЯ ВЛАСТИВОСТЕЙ ТА ПОРЯДОК БЛОКІВ */
     .block {
-        /* Це гарантує, що всі блоки будуть розташовані в новій одній колонці послідовно */
+        /* Скидаємо всі десктопні Grid-правила, що блокують перестроювання */
         grid-column: auto; 
         grid-row: auto;
         width: 100%;
         height: auto;
     }
 
-    /* Встановлення порядку блоків (order) */
-    /* Порядок: 1 -> 2 (Меню) -> 3 (Заголовок) -> 4 (Контент) -> 6 (Примітка) -> 5 (Довідка) -> 7 (Футер) */
+    /* Встановлення порядку блоків */
+    /* Порядок: 1 -> 2 -> 3 -> 4 -> 6 -> 5 -> 7 */
     .block-1 { order: 1; flex-direction: column; text-align: center; }
     .block-2 { order: 2; } 
     .block-3 { order: 3; }
@@ -151,10 +137,8 @@ body {
     .block-5 { order: 6; } /* Довідка йде перед футером */
     .block-7 { order: 7; }
 
-
-    /* 3. АДАПТАЦІЯ ЕЛЕМЕНТІВ */
+    /* АДАПТАЦІЯ ЕЛЕМЕНТІВ (ГОРИЗОНТАЛЬНЕ МЕНЮ) */
     .sidebar-menu {
-        /* Меню стає горизонтальним для мобільного вигляду */
         flex-direction: row; 
         flex-wrap: wrap; 
         justify-content: space-around;
@@ -164,10 +148,4 @@ body {
         width: 45%; 
         margin-bottom: 5px;
     }
-    
-    /* Виправлення елементів у шапці */
-    .header {
-        flex-direction: column;
-    }
 }
-
