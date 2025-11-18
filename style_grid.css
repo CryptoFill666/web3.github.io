@@ -121,60 +121,50 @@ body {
 /* АДАПТИВНІ СТИЛІ (MOBILE - Media Query) */
 /* ================================================= */
 
-/* Коли ширина екрана менше або дорівнює 768px (типовий смартфон/планшет) */
 @media screen and (max-width: 768px) {
-
-    /* 1. Розтягуємо контейнер на всю ширину екрана */
+    
     .container {
         width: 100%;
         max-width: 100%;
-        /* Змінюємо Grid: тепер це ОДНА КОЛОНКА */
-        grid-template-columns: 1fr;
-        /* Змінюємо Grid: рядки йдуть один за одним */
-        grid-template-rows: auto;
+        /* Змінюємо на ОДНУ КОЛОНКУ */
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto; 
     }
-
-    /* 2. Змінюємо розміщення всіх блоків: stacking */
+    
+    /* ЗНИЖЕННЯ СПЕЦИФІЧНОСТІ / ПОРЯДОК БЛОКІВ */
     .block-1, .block-7 {
-        grid-column: 1 / 2; /* Займають єдину колонку */
+        grid-column: 1 / 2 !important; /* Навіть шапка і футер повинні бути у 1 колонці */
+        width: 100% !important;
     }
 
-    /* 3. Змінюємо порядок блоків, щоб вони йшли один під одним */
-    .block-2 {
-        grid-column: 1;
-        order: 2; /* Йде після шапки */
-        padding: 10px;
-    }
-    .block-3 {
-        grid-column: 1;
-        order: 3;
-    }
-    .block-4 {
-        grid-column: 1;
-        order: 4;
-    }
-    .block-6 {
-        grid-column: 1;
-        order: 5;
-    }
-    .block-5 {
-        grid-column: 1;
-        order: 6; /* Йде в самому кінці (допоміжна інформація) */
+    .block-2, .block-3, .block-4, .block-5, .block-6 {
+        /* КРИТИЧНО: Скидаємо розміщення колонки, встановлене у десктоп-версії */
+        grid-column: auto !important; 
+        grid-row: auto !important;
+        width: 100% !important;
     }
 
-    /* 4. Забезпечуємо вертикальне меню */
+    /* Встановлюємо порядок, щоб блоки йшли вертикально: 
+       1 -> 2 (Меню) -> 3 (Заголовок) -> 4 (Контент) -> 6 (Примітка) -> 5 (Довідка) -> 7 (Футер) */
+    .block-2 { order: 2; }
+    .block-3 { order: 3; }
+    .block-4 { order: 4; }
+    .block-6 { order: 5; }
+    .block-5 { order: 6; } /* Довідка йде в кінець */
+
+    /* На мобільному меню має бути горизонтальним, щоб не займати багато висоти */
     .sidebar-menu {
-        flex-direction: row; /* На мобільному меню часто роблять горизонтальним або ховають */
-        flex-wrap: wrap; /* Дозволяємо переносити елементи */
+        flex-direction: row; 
+        flex-wrap: wrap; 
         justify-content: space-around;
-        width: 100%;
+        padding: 5px; 
     }
     .sidebar-menu a {
         width: 45%; /* По 2 кнопки в ряд */
         margin-bottom: 5px;
     }
-
-    /* 5. Виправлення шапки */
+    
+    /* Шапка по центру */
     .block-1 {
         flex-direction: column;
         text-align: center;
