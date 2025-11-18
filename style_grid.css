@@ -122,51 +122,52 @@ body {
 
 @media screen and (max-width: 768px) {
     
-    /* 1. КОНТЕЙНЕР: Зміна на одну колонку */
+    /* 1. КОНТЕЙНЕР: Перехід на одну колонку */
     .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        /* Переходимо на одну колонку та авто-рядки */
-        grid-template-columns: 1fr !important; 
-        grid-template-rows: auto !important; 
-        min-height: auto !important;
+        width: 100%;
+        max-width: 100%;
+        /* Зміна Grid: Встановлюємо одну колонку і авто-рядки */
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto; /* Висота рядків автоматично за контентом */
+        min-height: auto;
     }
     
-    /* 2. СКИДАННЯ ТА ПОРЯДОК БЛОКІВ (КРИТИЧНО) */
-    .block-1, .block-2, .block-3, .block-4, .block-5, .block-6, .block-7 {
-        /* Скидаємо всі десктопні Grid-правила, що блокують перестроювання */
-        grid-column: auto !important; 
-        grid-row: auto !important;
-        width: 100% !important;
-        height: auto !important;
-        padding: 15px;
+    /* 2. СКИДАННЯ ВЛАСТИВОСТЕЙ ТА ПОРЯДОК БЛОКІВ */
+    .block {
+        /* Це гарантує, що всі блоки будуть розташовані в новій одній колонці послідовно */
+        grid-column: auto; 
+        grid-row: auto;
+        width: 100%;
+        height: auto;
     }
 
-    /* 3. ВСТАНОВЛЕННЯ ПОРЯДКУ (Stacking Vertical) */
-    /* Порядок: 1 -> 2 -> 3 -> 4 -> 6 -> 5 -> 7 */
+    /* Встановлення порядку блоків (order) */
+    /* Порядок: 1 -> 2 (Меню) -> 3 (Заголовок) -> 4 (Контент) -> 6 (Примітка) -> 5 (Довідка) -> 7 (Футер) */
     .block-1 { order: 1; flex-direction: column; text-align: center; }
-    .block-2 { order: 2; } /* Меню йде одразу під шапкою */
+    .block-2 { order: 2; } 
     .block-3 { order: 3; }
     .block-4 { order: 4; }
     .block-6 { order: 5; }
-    .block-5 { order: 6; } /* Додаткова інформація йде перед футером */
+    .block-5 { order: 6; } /* Довідка йде перед футером */
     .block-7 { order: 7; }
 
-    /* 4. АДАПТАЦІЯ ЕЛЕМЕНТІВ (ГОРИЗОНТАЛЬНЕ МЕНЮ) */
+
+    /* 3. АДАПТАЦІЯ ЕЛЕМЕНТІВ */
     .sidebar-menu {
-        /* Перетворюємо вертикальне меню на горизонтальне (економія місця) */
-        flex-direction: row !important; 
-        flex-wrap: wrap; /* Дозволяємо переносити посилання на новий рядок */
+        /* Меню стає горизонтальним для мобільного вигляду */
+        flex-direction: row; 
+        flex-wrap: wrap; 
         justify-content: space-around;
         padding: 5px 0;
     }
     .sidebar-menu a {
-        width: 45%; /* Приблизно по 2 кнопки в ряд */
+        width: 45%; 
         margin-bottom: 5px;
     }
     
-    /* Виправлення шапки */
+    /* Виправлення елементів у шапці */
     .header {
         flex-direction: column;
     }
 }
+
